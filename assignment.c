@@ -110,23 +110,23 @@ void updateProjectileState(float t, float dt)
 }
 
 void drawCartesianCircle(float a, float b,int segments) {
-  
+  /* old equasion: x = a + sqrt( (2*b*y) - (b*b) + (r*r) - (y*y) ); */
   float r = 0.05;
   glBegin(GL_LINE_STRIP);
   glColor3f(1,1,1);
   float y = r,x;
   for (int i = 0;i<=segments;i++) {
     if (i < (segments/2) ){
-      x = a + sqrt( (2*b*y) - (b*b) + (r*r) - (y*y) );
+      x = a + sqrt( pow(r,2) - pow(y-b,2) );
       glVertex3f(x,y,0);
       y = y-(r/((float)segments/4));
     }
     else if ((2*i + 1) == segments) {
-      x = a + sqrt( (2*b*y) - (b*b) + (r*r) - (y*y) );
+      x = a + sqrt( pow(r,2) - pow(y-b,2) );
       glVertex3f(x,y,0);
     }
     else {
-      x = a - sqrt( (2*b*y) - (b*b) + (r*r) - (y*y) );
+      x = a - sqrt( pow(r,2) - pow(y-b,2) );
       glVertex3f(x,y,0);
       y = y+(r/((float)segments/4));
     }
